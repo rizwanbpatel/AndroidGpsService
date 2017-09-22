@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -20,7 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity /*implements View.OnClickListener */ {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button start, stop;
     private TextView textView;
@@ -65,11 +66,15 @@ public class MainActivity extends AppCompatActivity /*implements View.OnClickLis
             enableButtons();
         }
 
+        final Intent intent = new Intent(this, MapsActivity.class);
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Started", Toast.LENGTH_SHORT).show();
                 startService(new Intent(MainActivity.this, GpsService.class));
+                startActivity(intent);
+
             }
         });
 
@@ -108,4 +113,8 @@ public class MainActivity extends AppCompatActivity /*implements View.OnClickLis
         return false;
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }
